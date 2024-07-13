@@ -6,6 +6,8 @@ services:
       context: ./apache-php
     ports:
       - "8080:80"
+    volumes:
+      - ./apache-php:/var/www/html  # Monta todo el directorio apache-php en /var/www/html del contenedor
     environment:
       MYSQL_HOST: db
       MYSQL_DATABASE: test_db
@@ -25,4 +27,3 @@ services:
 volumes:
   db_data:
     driver: local
-
