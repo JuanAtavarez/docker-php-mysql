@@ -1,1 +1,28 @@
-"version: '3.8'services:  php-apache:    build:      context: ./apache-php    ports:      - '8080:80'    environment:      MYSQL_HOST: db      MYSQL_DATABASE: test_db      MYSQL_USER: root      MYSQL_PASSWORD: \${MYSQL_ROOT_PASSWORD}    depends_on:      - db  db:    image: mariadb:latest    environment:      MYSQL_ROOT_PASSWORD: \${MYSQL_ROOT_PASSWORD}      MYSQL_DATABASE: test_db    volumes:      - db_data:/var/lib/mysqlvolumes:  db_data:    driver: local" 
+version: '3.8'
+
+services:
+  php-apache:
+    build:
+      context: ./apache-php
+    ports:
+      - "8080:80"
+    environment:
+      MYSQL_HOST: db
+      MYSQL_DATABASE: test_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: test_db
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+    driver: local
+
